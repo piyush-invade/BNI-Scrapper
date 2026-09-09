@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>BNI Chapter Scraper</title>
+<link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <div class="app">
+    <header class="app-header">
+      <h1>BNI Chapter Scraper</h1>
+      <label class="debug-toggle" title="Show detection internals for troubleshooting">
+        <input type="checkbox" id="debugModeToggle" />
+        Debug
+      </label>
+    </header>
+
+    <section class="panel">
+      <h2>Current Page</h2>
+      <div class="kv">
+        <span class="k">URL</span>
+        <span class="v" id="currentUrl">—</span>
+      </div>
+      <div class="kv">
+        <span class="k">Chapter</span>
+        <span class="v" id="chapterName">—</span>
+      </div>
+      <div class="kv">
+        <span class="k">Chapter ID</span>
+        <span class="v" id="chapterId">—</span>
+      </div>
+      <div class="kv">
+        <span class="k">Region ID</span>
+        <span class="v" id="regionId">—</span>
+      </div>
+      <div class="kv">
+        <span class="k">Members detected</span>
+        <span class="v" id="memberCount">—</span>
+      </div>
+    </section>
+
+    <section class="panel buttons-panel">
+      <div class="btn-row">
+        <button id="btnDetect" class="btn">Detect Chapter</button>
+        <button id="btnScrape" class="btn btn-primary">Scrape This Chapter</button>
+      </div>
+      <div class="btn-row">
+        <button id="btnStop" class="btn btn-danger" disabled>Stop</button>
+        <button id="btnPreview" class="btn">Preview Data</button>
+      </div>
+      <div class="btn-row">
+        <button id="btnExportExcel" class="btn">Export Excel</button>
+        <button id="btnExportCsv" class="btn">Export CSV</button>
+      </div>
+      <div class="btn-row">
+        <button id="btnClear" class="btn btn-subtle">Clear Data</button>
+      </div>
+      <label class="option-line">
+        <input type="checkbox" id="appendToMasterToggle" />
+        Append to Master Dataset
+      </label>
+    </section>
+
+    <section class="panel">
+      <h2>Scraping Log</h2>
+      <div id="logBox" class="log-box"></div>
+    </section>
+
+    <section class="panel" id="debugPanel" hidden>
+      <h2>Debug Info</h2>
+      <pre id="debugContent" class="debug-content"></pre>
+      <button id="btnCopyDebug" class="btn btn-subtle">Copy Debug Information</button>
+    </section>
+
+    <section class="panel" id="previewPanel" hidden>
+      <h2>Preview <span id="previewCount"></span></h2>
+      <div class="table-wrap">
+        <table id="previewTable">
+          <thead></thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Scraped Chapters</h2>
+      <div class="table-wrap">
+        <table id="historyTable">
+          <thead>
+            <tr><th>Chapter</th><th>Chapter ID</th><th>Members</th><th>Date</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </section>
+  </div>
+
+  <script src="../lib/xlsx/xlsx.core.min.js"></script>
+  <script src="../utils/deduplication.js"></script>
+  <script src="../storage/storage.js"></script>
+  <script src="../export/excelExporter.js"></script>
+  <script src="popup.js"></script>
+</body>
+</html>
